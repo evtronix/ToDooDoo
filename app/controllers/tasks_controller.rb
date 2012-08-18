@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
 	attr_accessor :completed
-	before_filter :find_list
+	before_filter :find_list, :authenticate_user!
 	respond_to :html, :xml, :js
 
 	def create
@@ -24,6 +24,6 @@ class TasksController < ApplicationController
 	private
 
 	def find_list
-		@list = List.find(params[:list_id])
+		@list = current_user.lists.find(params[:list_id])
 	end
 end

@@ -1,13 +1,15 @@
+<div class="page-header">
 <h2><%= @list.name %></h2>
-<p><%= @list.description %><p>
+<h6><%= @list.description %></h6>
+</div>
 
 <h3>Shit to do</h3>
 <ul>
 	<% @list.tasks.incomplete.each do |task| %>
-	<li><%= task.description %> - <%= button_to "Complete", complete_task_path(@list.id,task.id) %></li>
+	<li><%= link_to "<i class='icon-ok'></i>".html_safe, complete_task_path(@list.id,task.id), class: "btn btn-mini btn-success" %>   <%= task.description %></li>
 	<% end %>
 </ul>
-
+<br>
 <h3>Completed shit</h3>
 <ul>
 	<% @list.tasks.completed.each do |task| %>
@@ -22,7 +24,3 @@
 <p><%= form.text_field :description %> <%= form.submit %></p>
 
 <% end %>
-
-<hr />
-
-<%= link_to "Back to all lists", lists_path %>

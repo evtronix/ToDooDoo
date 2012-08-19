@@ -1,11 +1,13 @@
 class ListsController < ApplicationController
 
-	before_filter :authenticate_user!
+	before_filter :authenticate_user!, except: :index
 
 	respond_to :html, :xml, :js
 
 	def index
-		@lists = current_user.lists.all
+		if user_signed_in?
+			@lists = current_user.lists.all
+		end
 	end
 
 	def new

@@ -1,15 +1,8 @@
-<h1>My Todo Lists</h1>
-
-<div id="user_nav">
-	<% if user_signed_in? %>
-		Logged in as <strong><%= current_user.email %></strong>
-		<%= link_to 'Edit profile', edit_user_registration_path %> |
-		<%= link_to "Logout", destroy_user_session_path, method: :delete %>
-	<% else %>
-		<%= link_to "Sign up", new_user_registration_path %> |
-		<%= link_to "Login", new_user_session_path %>
-	<% end %>
-</div>
+<% if !user_signed_in? %>
+	<div class="center hero-unit">
+	<h1 id="herotext">Welcome to ToDooDoo</h1>
+	</div>
+<% else %>
 
 <% @lists.each do |list| %>
 
@@ -18,6 +11,4 @@
 
 <% end %>
 
-<hr />
-
-<%= link_to "Add new list", new_list_path %>
+<% end %>
